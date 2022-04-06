@@ -1,0 +1,202 @@
+\documentclass[a4 paper]{article}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\homework}[6]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CSE 211:~Discrete Mathematics \hfill {\small (#2)}} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\Large \hfill #1  \hfill} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\it Instructor: {\rm #3} \hfill  {\rm #5} \hfill  {\rm #6}} \hfill}
+       \hbox to 6.28in { {\it Assistant: #4  \hfill #6}}
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{#5 -- #1}{#5 -- #1}
+   \vspace*{4mm}
+}
+
+\newcommand{\problem}[2]{~\\\fbox{\textbf{Problem #1}}\hfill (#2 points)\newline\newline}
+\newcommand{\subproblem}[1]{~\newline\textbf{(#1)}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\Hy}{\mathcal{H}}
+\newcommand{\VS}{\textrm{VS}}
+\newcommand{\solution}{~\newline\textbf{\textit{(Solution)}} }
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bepsilon}{\boldsymbol{\epsilon}}
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+\newcommand{\0}{\mathbf{0}}
+
+
+\begin{document}
+\homework{Homework \#3}{Due: 04/01/21}{Dr. Zafeirakis Zafeirakopoulos}{Gizem S\"ung\"u}{}{}
+\textbf{Course Policy}: Read all the instructions below carefully before you start working on the assignment, and before you make a submission.
+\begin{itemize}
+\item It is not a group homework. Do not share your answers to anyone in any circumstance. Any cheating means at least -100 for both sides. 
+\item Do not take any information from Internet.
+\item No late homework will be accepted. 
+\item For any questions about the homework, send an email to gizemsungu@gtu.edu.tr
+\item The homeworks (both latex and pdf files in a zip file) will be
+submitted into the course page of Moodle.
+\item The latex, pdf and zip files of the homeworks should be saved as
+"Name\_Surname\_StudentId".$\{$tex, pdf, zip$\}$.
+\item If the answers of the homeworks have only calculations without any formula or any explanation -when needed- will get zero.
+\item Writing the homeworks on Latex is strongly suggested. However, hand-written paper is still accepted $\textbf{IFF}$ hand writing of the student is clear and understandable to read, and the paper is well-organized. Otherwise, the assistant cannot grade the student's homework.
+\end{itemize}
+
+\problem{1: Representing Graphs}{10}
+Represent the graph in Figure \ref{fig:graph1} with an adjacency matrix. Explain your representation clearly.
+\begin{figure*}[htb]
+	\centering
+	\includegraphics[scale=0.5]{graph1.png}
+	\caption{The graph for Problem 1}
+	\label{fig:graph1}
+\end{figure*}
+\solution
+The columns represent a, b, c, d and e from left to right respectively. The rows represent a, b, c, d and e from top to bottom respectively. If there is an arrow from a to b that must be represented by putting a 1 on the row of a and the column of b. If there is not an arrow from c to e, that must be represented by putting a 0 on the row of c and the column of e. There must be the same number of rows and columns since adjacency of each vertex to each vertex will be observed and that can be done on an n by n matrix. There are 5 vertices in the given graph so the adjacency matrix will be a 5 by 5 matrix, each number representing the relation between two vertices including the relation a vertex may have with itself.
+
+$$
+\begin{bmatrix} 
+    0&1&0&1&0\\
+    1&0&1&1&1\\
+    0&1&1&0&0\\
+    1&0&0&0&1\\
+    0&0&1&0&1\\
+\end{bmatrix}
+\quad
+$$
+
+\newpage
+\problem{2: Hamilton Circuits}{10+10+10=30}
+Determine whether there is a Hamilton circuit for each given graph (See Figure \ref{fig:G1a}, Figure \ref{fig:G1b}, Figure \ref{fig:G1c} ). If the graph has a Hamilton circuit, show the path with its vertices which gives a Hamilton circuit. If it does not, explain why no Hamilton circuit exists. \newline
+\begin{figure*}[h]
+	\centering
+	\begin{subfigure}[h]{0.5\textwidth}
+		\centering
+		\includegraphics[height=1.5in]{circuit-a.png}
+		\caption{The graph $G_1$}
+		\label{fig:G1a}
+	\end{subfigure}%
+	\begin{subfigure}[h]{0.5\textwidth}
+		\centering
+		\includegraphics[height=1.5in]{circuit-b.png}
+		\caption{The graph $G_2$}
+		\label{fig:G1b}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.5\textwidth}
+		\centering
+		\includegraphics[height=1.2in]{circuit-c.png}
+		\caption{The graph $G_3$}
+		\label{fig:G1c}
+	\end{subfigure}
+	\caption{The graphs to find Hamilton circuits for Problem 1}
+\end{figure*}
+
+\subproblem{a} \solution\\
+In order for a graph to be a Hamilton circuit, the graph first should be a simple graph. A simple graph has no directed edges, no loops and no multiple edges. The graph G1's edges are all undirected ,there are no arrowheads, it has no loops ,no vertice has an edge with itself, and no multiple edges ,no two vertice has more than one edge with each other. G1 is a simple graph. For a graph to be a Hamilton circuit, there must be a path that passes through all the vertices and returns where it started. Dirac Theorem states that if G is a simple graph with n vertices ,n$\geq$3, and every vertice has a degree of at least n/3, then G has a Hamilton circuit. G1 has 17 vertices. If every vertice of G1 has at least 17/3 = 5.77 vertices, G1 has a Hamilton circuit. Since the degree of a vertice must be an integer, every vertice of G1 must have at least a degree of 6. Vertice a has a degree of 2. Since one of the vertices have less than 6 vertices, it is known that graph G1 does not have a Hamilton circuit.
+\subproblem{b} \solution\\
+The graph G2's edges are all undirected ,there are no arrowheads, it has no loops ,no vertice has an edge with itself, and no multiple edges ,no two vertice has more than one edge with each other. G2 is a simple graph. G2 has 7 vertices. If every vertice of G2 has at least 7/3 = 2.33 vertices, G2 has a Hamilton circuit. Since the degree of a vertice must be an integer, every vertice of G2 must have at least a degree of 3. Vertice a has a degree of 3, vertice b has a degree of 4, vertice c has a degree of 4, vertice d has a degree of 4 but vertice e, f and g all have just one edge incident to them, which doesn't satisfy the condition of Dirac Theorem, so G2 does not have a Hamilton circuit.
+\subproblem{c} \solution\\
+The graph G3's edges are all undirected ,there are no arrowheads, it has no loops ,no vertice has an edge with itself, and no multiple edges ,no two vertice has more than one edge with each other. G3 is a simple graph. G3 has 9 vertices. If every vertice of G3 has at least 9/3 = 3 vertices, G3 has a Hamilton circuit. Vertice a has a degree of 3, vertice b has a degree of 3, vertice c has a degree of 3, vertice d has a degree of 3, vertice e has a degree of 8, vertice f has a degree of 3, vertice g has a degree of 3, vertice h has a degree of 3, vertice i has a degree of 3. Every vertice of G3 has a degree of at least 3, which makes G3 have a Hamilton circuit. The Hamilton path that makes a Hamilton circuit is a, e, b, c, f, i, h, g, d, a. 
+
+\problem{3: Applications on Graphs}{20}
+Schedule the final exams for Math 101, Math 243, CSE 333, CSE 346, CSE 101, CSE 102, CSE 273, and CSE 211, using the fewest number of different time slots, if there are no students who are taking:
+\begin{itemize}
+	\item both Math 101 and CS 211,
+	\item both Math 243 and CS 211,
+	\item both CSE 346 and CSE 101,
+	\item both CSE 346 and CSE 102,
+	\item both Math 101 and Math 243,
+	\item both Math 101 and CSE 333,
+	\item both CSE 333 and CSE 346
+\end{itemize}
+but there are students in every other pair of courses together for this semester.\\ 
+$\textbf{Note:}$ Assume that you have only one classroom.\\ \\
+$\textit{Hint 1: Solve the problem with respect to your problem session notes.}$\\
+$\textit{Hint 2: \hyperlink{https://www.draw.io/}{Check the website}}$
+\newline
+\solution
+\begin{figure*}[h]
+	\centering
+		\includegraphics[height=3in]{colored_graph.png}
+		\caption{Colored Graph}
+\end{figure*}
+
+The courses that a student has simultaneously have an edge connecting them. Starting from Math 243, it will be red. The courses connected to Math 243 cannot be red, so CSE233, CSE346, CSE101, CSE102 and CSE273 cannot be red. Math243, CSE333, CSE101 and CSE102 are all connected to each other, so they all should have a different color. They are colored accordingly. If there is a course connected to all four of these courses, that course also need to be a different color since it will be connected to all of them and it cannot have the same color with any of the courses it's connected to. CSE211 is connected to CSE273, CSE102, CSE101 and CSE333 so it must have a different color than them. It is not connected to a red course so it can be red. There is no need to use an entirely different color for CSE211. The remaining are Math101 and CSE346. Math 101 can be red or blue, and CSE346 can be blue, yellow or green but they cannot have the same color since they have an edge and in a colored graph, if two vertices have an edge connecting them, they cannot have the same color.
+\newpage
+\problem{4: Applications for Hasse Diagram of Relations}{40}
+Remember the Problem 3 in Homework 2. 
+\newline
+\newline
+Write an algorithm to draw Hasse diagram of the given relations in "input.txt" which is given for HW2.
+\newline
+\newline
+Your code should meet the following requirements, standards and accomplish the given tasks.
+
+
+\begin{itemize}
+	\item Read the relations from the text file "input.txt". You can use your code from HW2 if you implemented to read the file. If you didn't implement it, please check HW2 to learn how to read the relations from the file. 
+	\item Determine each relation in "input.txt" whether it is reflexive, symmetric, anti-symmetric and transitive with your algorithm from HW2.
+	\item In order to draw Hasse diagram, each relation must be POSET. Hence, the relation obeys the following rules:
+	
+	\begin{itemize}
+		\item Reflexivity
+		\item Anti-symmetric
+		\item Transitivity 
+	\end{itemize}
+	If the relation is not a POSET, your algorithm is responsible to CONVERT it to POSET. 
+	\begin{itemize}
+		\item If the relation is not reflexive, add new pairs to make the relation reflexive.
+		\item If the relation is symmetric, remove some pairs which make the relation symmetric. For instance, if the relation has (a, b) and (b, a), remove one of them randomly.
+		\item If the relation is not transitive, add new pairs which would make the relation transitive. 
+	\end{itemize}
+	\item After the relation becomes POSET, your algorithm should obtain Hasse diagram of the relation and write the diagram with the following format. 
+	\begin{itemize}
+		\item An example of the output format is given in "exampleoutput.txt". The file has the result of the first relation in "input.txt".
+		\item In "output.txt", each new Hasse diagram starts with "n".
+		\item The relation is (a, a), (a, b), (a, e), (b, b), (b, e), (c, c), (c, d), (d, d), (e, e)
+		\item The relation is already a POSET so we don't need to add or remove any pairs.
+		\item After "n", write the POSET in the next line as it is shown in "exampleoutput.txt".
+		\item Since the relation is POSET, it becomes (a, b), (b, e), (c, d) after removing reflexive and transitive pairs. 
+		\item The following lines give each pair of Hasse diagram.
+	\end{itemize}	
+	\item You can implement your algorithm in Python, Java, C or C++.
+	\item $\textbf{Important: }$ Put comments almost for each line of your code to describe what the line is going to do. 
+	\item You should put your source code file (file name is problem1.$\{.c, .java, .py, .cpp\}$) and output.txt into your homework zip file (check Course Policy).
+\end{itemize}
+
+
+
+\end{document} 
